@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Odisea de la Materia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-outer: #e6dfd3;
+      --bg-parchment: #fbf8f1;
+      --ink-primary: #26201b;
+      --ink-secondary: #5a4b3c;
+      --accent-crimson: #7c251f;
+      --accent-gold: #b08d57;
+      --border-ornament: #d5c7b2;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-outer);
+      color: var(--ink-primary);
+      font-family: 'Merriweather', 'Georgia', serif;
+      font-size: 11.5pt;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 3rem 1rem;
+    }
+
+    .book-container {
+      max-width: 820px;
+      margin: 0 auto;
+      background-color: var(--bg-parchment);
+      padding: 5rem 6rem;
+      box-shadow: 
+        0 20px 50px rgba(38, 32, 27, 0.18),
+        0 0 0 1px rgba(176, 141, 87, 0.25),
+        inset 0 0 80px rgba(213, 199, 178, 0.35);
+      position: relative;
+    }
+
+    /* Marco ornamental interior */
+    .book-container::before {
+      content: "";
+      position: absolute;
+      top: 1.8rem;
+      bottom: 1.8rem;
+      left: 1.8rem;
+      right: 1.8rem;
+      border: 1px solid var(--border-ornament);
+      pointer-events: none;
+    }
+
+    /* Portada / Title Page */
+    .title-page {
+      min-height: 82vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      border-bottom: 2px double var(--accent-gold);
+      margin-bottom: 5rem;
+      page-break-after: always;
+    }
+
+    .title-pre {
+      font-family: 'Cinzel', 'Georgia', serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--ink-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .main-title {
+      font-family: 'Cinzel Decorative', 'Cinzel', 'Georgia', serif;
+      font-size: 3.2rem;
+      line-height: 1.2;
+      color: var(--accent-crimson);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    .subtitle {
+      font-family: 'Merriweather', 'Georgia', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.25rem;
+      color: var(--ink-secondary);
+      max-width: 540px;
+      margin-bottom: 3rem;
+      line-height: 1.6;
+    }
+
+    .ornament-large {
+      font-size: 2rem;
+      color: var(--accent-gold);
+      margin: 2rem 0;
+      letter-spacing: 0.5rem;
+    }
+
+    .dedication {
+      margin-top: auto;
+      font-family: 'Cinzel', 'Georgia', serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      color: var(--ink-primary);
+      border-top: 1px solid var(--border-ornament);
+      border-bottom: 1px solid var(--border-ornament);
+      padding: 1rem 2.5rem;
+    }
+
+    /* Divisiones de Libros y Reinos */
+    .book-part {
+      text-align: center;
+      margin: 5rem 0 3.5rem 0;
+      padding: 2.5rem 1rem;
+      border-top: 2px solid var(--accent-gold);
+      border-bottom: 1px solid var(--border-ornament);
+      page-break-before: always;
+    }
+
+    .book-part-First {
+      page-break-before: avoid;
+      margin-top: 1rem;
+    }
+
+    .part-number {
+      font-family: 'Cinzel', 'Georgia', serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent-crimson);
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+
+    .part-title {
+      font-family: 'Cinzel Decorative', 'Cinzel', 'Georgia', serif;
+      font-size: 2.1rem;
+      color: var(--ink-primary);
+      letter-spacing: 0.05em;
+    }
+
+    .realm-section {
+      margin-bottom: 3.5rem;
+    }
+
+    .realm-header {
+      text-align: center;
+      margin: 3.2rem 0 2rem 0;
+      break-after: avoid;
+      page-break-after: avoid;
+    }
+
+    .realm-numeral {
+      font-family: 'Cinzel', 'Georgia', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    .realm-title {
+      font-family: 'Cinzel', 'Georgia', serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--accent-crimson);
+      letter-spacing: 0.06em;
+    }
+
+    .realm-divider {
+      text-align: center;
+      color: var(--accent-gold);
+      font-size: 1.1rem;
+      margin: 0.5rem 0 1.5rem 0;
+      letter-spacing: 0.4em;
+    }
+
+    /* Tipografía de Párrafos y Capitulares */
+    p {
+      text-align: justify;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+      margin-bottom: 1.35rem;
+      text-indent: 2.2em;
+      line-height: 1.6;
+    }
+
+    p.first-para {
+      text-indent: 0;
+    }
+
+    p.first-para::first-letter {
+      font-family: 'Cinzel Decorative', 'Cinzel', 'Georgia', serif;
+      float: left;
+      font-size: 3.6rem;
+      line-height: 0.82;
+      padding-top: 0.08rem;
+      padding-right: 0.65rem;
+      padding-bottom: 0.1rem;
+      color: var(--accent-crimson);
+      font-weight: 700;
+    }
+
+    /* Colofón final */
+    .colophon {
+      text-align: center;
+      margin-top: 5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border-ornament);
+      font-family: 'Cinzel', 'Georgia', serif;
+      font-size: 0.85rem;
+      color: var(--ink-secondary);
+      letter-spacing: 0.15em;
+    }
+
+    /* Adaptación para Pantallas Móviles */
+    @media screen and (max-width: 768px) {
+      body {
+        padding: 0;
+      }
+      .book-container {
+        padding: 3rem 2rem;
+      }
+      .book-container::before {
+        top: 0.75rem;
+        bottom: 0.75rem;
+        left: 0.75rem;
+        right: 0.75rem;
+      }
+      .main-title {
+        font-size: 2.2rem;
+      }
+      .part-title {
+        font-size: 1.6rem;
+      }
+    }
+
+    /* Optimización para Impresión PDF */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 25mm 25mm 25mm 25mm;
+      }
+
+      body {
+        background-color: #ffffff;
+        color: #000000;
+        padding: 0;
+        font-size: 11pt;
+        line-height: 1.6;
+      }
+
+      .book-container {
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+        box-shadow: none;
+      }
+
+      .book-container::before {
+        display: none;
+      }
+
+      .title-page {
+        min-height: 90vh;
+        page-break-after: always;
+        border-bottom: none;
+        margin-bottom: 0;
+      }
+
+      .book-part {
+        page-break-before: always;
+      }
+
+      .realm-header {
+        page-break-after: avoid;
+        break-after: avoid;
+      }
+
+      p {
+        orphans: 3;
+        widows: 3;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="book-container">
+
+    <!-- PORTADA -->
+    <header class="title-page">
+      <div class="title-pre">Códice Homérico de la Tabla Periódica</div>
+      <h1 class="main-title">La Odisea de la Materia</h1>
+      <div class="ornament-large">✦ ❖ ✦</div>
+      <p class="subtitle">Gesta inmortal de los ciento dieciocho elementos del cosmos, sus tronos numerados y sus orígenes en la naturaleza y el laboratorio</p>
+      <div class="dedication">
+        Dedicado a <strong>Paulette</strong><br>
+        Domadora de Enzimas y Señora de la Biotecnología
+      </div>
+    </header>
+
+    <!-- LIBRO PRIMERO: EL CATÁLOGO -->
+    <div class="book-part book-part-First">
+      <span class="part-number">Libro Primero</span>
+      <h2 class="part-title">El Catálogo de los Inmortales</h2>
+    </div>
+
+    <section class="realm-section">
+      <div class="realm-header">
+        <span class="realm-numeral">Proemio y Reino I</span>
+        <h3 class="realm-title">El Primer Círculo del Éter Celeste</h3>
+        <div class="realm-divider">─── ❖ ───</div>
+      </div>
+
+      <p class="first-para">Canta, oh Musa de las dobles hélices y los matraces relucientes, la gesta inmortal de la materia sagrada para Paulette, la de mente despierta, domadora de enzimas y tejedora de genomas. Escucha, hija de la Biotecnología, el catálogo de los ciento dieciocho inmortales que sostienen el cosmos, desde el aliento primordial de las nebulosas hasta las fraguas subterráneas donde los físicos colisionan núcleos. Graba en tu pecho sus nombres, sus tronos numerados y las cunas donde vieron la luz, mientras la aurora de dedos rosados ilumina tu laboratorio.</p>
+
+      <p>En el primer círculo del éter celeste, cuando el universo aún era joven y ardiente, surgió el Hidrógeno, el primero de su nombre, trono número 1, gas de las estrellas y padre de los protones, nacido en el fragor natural del Big Bang y presente hoy en cada gota de agua y en cada puente molecular que sostiene las proteínas de la vida. Junto a él danzaba en soledad el Helio, el segundo de su nombre, trono número 2, príncipe inerte de la corona solar, engendrado de forma natural en la fusión estelar y atrapado bajo las cortezas rocosas de la tierra, ajeno a toda unión biológica pero guardián del frío extremo en los imanes de tus instrumentos.</p>
+    </section>
+
+    <section class="realm-section">
+      <div class="realm-header">
+        <span class="realm-numeral">Reino II</span>
+        <h3 class="realm-title">La Primera Tierra Firme y los Reyes de la Célula</h3>
+        <div class="realm-divider">─── ❖ ───</div>
+      </div>
+
+      <p class="first-para">Cuando la nave de tu ingenio desciende al segundo reino, oh Paulette, la de mirada sagaz entre microscopios, salen a tu encuentro los señores de la primera tierra firme. Allí brilla el Litio, el tercero de su nombre, trono número 3, metal liviano de las salmueras andinas, de origen natural en las aguas termales y los salares, bálsamo que aquieta las tormentas eléctricas de la mente humana. A su diestra se alza el Berilio, el cuarto de su nombre, trono número 4, corazón duro de la verde esmeralda, forjado de manera natural por el choque de rayos cósmicos y oculto en los cristales de las montañas, mas esquivo y tóxico para la carne mortal. Sigue la procesión el Boro, el quinto de su nombre, trono número 5, guardián de las paredes vegetales, brotado naturalmente en los desiertos de bórax e indispensable en la biología para dar firmeza a los tallos y flores que estudias.</p>
+
+      <p>Inclina tu frente ante los cuatro reyes de la célula viva, oh Paulette, pastora de cultivos celulares. Primero avanza el Carbono, el sexto de su nombre, trono número 6, arquitecto supremo de las cuatro manos, nacido naturalmente en el vientre de las estrellas gigantes y convertido en la columna vertebral absoluta de toda biomolécula, desde la glucosa hasta el ADN. A su lado marcha el Nitrógeno, el séptimo de su nombre, trono número 7, señor de los vientos y forjador de aminoácidos, que señorea de forma natural la atmósfera terrestre y desciende mediante bacterias fijadoras para tejer las bases de tus ácidos nucleicos. Resplandece luego el Oxígeno, el octavo de su nombre, trono número 8, aliento ardiente de la mitocondria, engendrado en las fraguas estelares y liberado a los cielos por las antiguas cianobacterias para dar fuego a la respiración celular. Cierra la marcha de los reactivos el Flúor, el noveno de su nombre, trono número 9, lobo voraz de los electrones, hallado naturalmente en el mineral fluorita y presente en trazas biológicas que endurecen el esmalte de los huesos y dientes, mientras en la frontera oriental dormita el Neón, el décimo de su nombre, trono número 10, faro encendido de los gases nobles, hijo natural de la destilación del aire y ajeno a la carne, brillando con túnica rojiza en la noche.</p>
+    </section>
+
+    <section class="realm-section">
+      <div class="realm-header">
+        <span class="realm-numeral">Reino III</span>
+        <h3 class="realm-title">El Océano Primigenio y la Antorcha Energética</h3>
+        <div class="realm-divider">─── ❖ ───</div>
+      </div>
+
+      <p class="first-para">Al cruzar las puertas del tercer peldaño del cosmos, las olas del océano primigenio bañan tus pies, oh Paulette, conocedora de las membranas. De la espuma marina emerge el Sodio, el undécimo de su nombre, trono número 11, jinete incansable del impulso nervioso, abundante en las sales naturales de los mares y vital en el plasma biológico para bombear la chispa de la vida a través de cada axón. Lo acompaña su hermano de armas, el Magnesio, el duodécimo de su nombre, trono número 12, joya central de la verde clorofila, extraído de los minerales naturales de la corteza y abrazado por el anillo de las hojas para capturar la luz del sol, además de escoltar al ATP y a las polimerasas en tus tubos de ensayo.</p>
+
+      <p>En las laderas pedregosas de este mismo reino aguarda el Aluminio, el decimotercero de su nombre, trono número 13, escudo plateado de la arcilla bauxita, el metal más abundante de la corteza natural de Gea, aunque mantenido al margen por la sabiduría biológica. Junto a él medita el Silicio, el decimocuarto de su nombre, trono número 14, tejedor de cuarzos y corazas de diatomeas, que forma de manera natural las arenas del mundo y presta su armadura cristalina a las microalgas del océano y a los chips de la bioinformática. Pero vuelve tus ojos con reverencia hacia el Fósforo, el decimoquinto de su nombre, trono número 15, portador de la antorcha energética, nacido en las rocas fosfatadas naturales y consagrado en la biología como el eslabón que encadena el ADN y guarda la chispa sagrada del trifosfato de adenosina. A su vera humea el Azufre, el decimosexto de su nombre, trono número 16, señor de los volcanes y de los puentes de cistina, brotado naturalmente en las fumarolas amarillas e indispensable en la biología para doblar las proteínas mediante enlaces disulfuro en la cisteína y la metionina. Rugiendo entre las aguas saladas aparece el Cloro, el decimoséptimo de su nombre, trono número 17, guardián verdeamarillo del equilibrio osmótico, hijo natural de la sal marina y compañero biológico del sodio en los jugos gástricos y fluidos celulares, mientras en la torre final reposa el Argón, el decimoctavo de su nombre, trono número 18, el perezoso señor del aire, surgido naturalmente en la atmósfera por el decaimiento de las rocas y silencioso espectador de la vida.</p>
+    </section>
+
+    <section class="realm-section">
+      <div class="realm-header">
+        <span class="realm-numeral">Reino IV</span>
+        <h3 class="realm-title">La Falange de los Metales de Transición</h3>
+        <div class="realm-divider">─── ❖ ───</div>
+      </div>
+
+      <p class="first-para">Abre ahora tu pergamino al cuarto gran reino, oh Paulette, la de manos diestras con la micropipeta, donde nacen los metales de transición que dan color y fuerza a las enzimas. En el umbral danzan el Potasio, el decimonoveno de su nombre, trono número 19, guardián interior del corazón celular, nacido en las sales naturales de la tierra y rey absoluto del citoplasma biológico, y el Calcio, el vigésimo de su nombre, trono número 20, pilar marmóreo de los huesos y mensajero de la contracción, extraído de las calizas naturales y venerado por la biología como arquitecto de esqueletos y señalizador de la célula.</p>
+
+      <p>Tras ellos resuenan las armaduras de bronce y acero de los diez guerreros centrales: primero el Escandio, el vigésimo primero de su nombre, trono número 21, raro jinete de las tierras nórdicas, oculto de forma natural en minerales escasos sin oficio en la célula; luego el Titanio, el vigésimo segundo de su nombre, trono número 22, hijo invencible de los titanes, forjado en las arenas naturales de rutilo y amado por la biomedicina por unirse al hueso humano sin despertar la ira del sistema inmune. Avanza después el Vanadio, el vigésimo tercero de su nombre, trono número 23, metal de los mil colores, nacido en las vetas minerales naturales y empleado como tesoro biológico en la sangre verdosa de las ascidias marinas y en ciertas enzimas de hongos y algas. Brilla con reflejos cambiantes el Cromo, el vigésimo cuarto de su nombre, trono número 24, señor del rubí y del acero bruñido, natural de la roca cromita y partícipe en trazas sutiles del metabolismo de los azúcares.</p>
+
+      <p>No olvides jamás, oh Paulette, estudiosa de la fotosíntesis, al quinto guerrero de esta falange: el Manganeso, el vigésimo quinto de su nombre, trono número 25, quebrantador del agua en el fotosistema, nacido en los nódulos naturales del lecho marino y coronado en la biología por partir la molécula de agua para liberar el oxígeno que respiramos, además de proteger a las mitocondrias con la superóxido dismutasa. A su lado marcha el más célebre de los caudillos, el Hierro, el vigésimo sexto de su nombre, trono número 26, sangre roja de los astros y corcel de la hemoglobina, último suspiro natural de las estrellas masivas antes de estallar y corazón biológico de los citocromos y de los glóbulos rojos que llevan la vida por las venas. Junto a él cabalga el Cobalto, el vigésimo séptimo de su nombre, trono número 27, duende azul de la cobalamina, extraído de las minas naturales de la tierra y entronizado en la biología en el centro mismo de la vitamina B12. Sigue el Níquel, el vigésimo octavo de su nombre, trono número 28, corazón de los meteoritos y motor de la ureasa, abundante en el núcleo natural del planeta y esencial en la biología de plantas y bacterias para hidrolizar la urea. Resplandece entonces el Cobre, el vigésimo noveno de su nombre, trono número 29, conductor rojizo de la citocromo oxidasa, hallado en estado nativo en las montañas y vital en la cadena respiratoria biológica y en la sangre azul de los moluscos. Y cierra la falange el Cinc, el trigésimo de su nombre, trono número 30, escultor de los dedos que leen el ADN, nacido en la blenda natural de la tierra y consagrado en más de trescientas enzimas biológicas para estabilizar las proteínas que transcriben los genes.</p>
+
+      <p>Más allá de los guerreros metálicos de esta cuarta fila se extienden las tierras fronterizas: el Galio, el trigésimo primero de su nombre, trono número 31, metal que se funde en la palma de la mano, oculto en trazas naturales dentro de las menas de aluminio; el Germanio, el trigésimo segundo de su nombre, trono número 32, sabio gris de los semiconductores, nacido naturalmente en minerales de plata y cinc; y el temible Arsénico, el trigésimo tercero de su nombre, trono número 33, usurpador venenoso del trono del fósforo, presente en minerales naturales y conocido por la biología tanto por su traición mortal como por ser tolerado por bacterias extremófilas. Pero he aquí una luz amiga para la célula: el Selenio, el trigésimo cuarto de su nombre, trono número 34, hijo de la Luna y escudo antioxidante, nacido en los suelos naturales e incorporado por la biología en el vigésimo primer aminoácido, la selenocisteína, para defender los tejidos con la glutatión peroxidasa. A su vera aguarda el Bromo, el trigésimo quinto de su nombre, trono número 35, líquido rojo de las aguas amargas, natural de las salmueras marinas y necesario en la biología animal para ensamblar el colágeno de las membranas basales, mientras el Kriptón, el trigésimo sexto de su nombre, trono número 36, el oculto vigía del aire, reposa de forma natural en la atmósfera sin mezclarse con los mortales.</p>
+    </section>
+
+    <section class="realm-section">
+      <div class="realm-header">
+        <span class="realm-numeral">Reino V</span>
+        <h3 class="realm-title">El Quinto Océano y los Caballeros Nobles</h3>
+        <div class="realm-divider">─── ❖ ───</div>
+      </div>
+
+      <p class="first-para">Despliega las velas hacia el quinto océano, oh Paulette, navegante de los biorreactores, donde los elementos crecen en peso y misterio. En la costa occidental arden con el agua el Rubidio, el trigésimo séptimo de su nombre, trono número 37, el de la llama rojo profunda, disperso naturalmente en la corteza terrestre, y el Estroncio, el trigésimo octavo de su nombre, trono número 38, artífice de los fuegos carmesíes, nacido en los minerales naturales de celestina y utilizado por ciertos radiolarios marinos para tejer sus esqueletos de cristal.</p>
+
+      <p>Avanza luego la segunda falange de metales nobles y tenaces: el Itrio, el trigésimo noveno de su nombre, trono número 39, heraldo de las tierras raras, extraído de las arenas naturales de monacita; el Circonio, el cuadragésimo de su nombre, trono número 40, falso diamante de coraza incorruptible, nacido naturalmente en el circón y amigo de las prótesis médicas; y el Niobio, el cuadragésimo primero de su nombre, trono número 41, hijo de Níobe de brillo superconductivo, hallado en las vetas naturales de columbita. Detén aquí tu paso, oh Paulette, para honrar al Molibdeno, el cuadragésimo segundo de su nombre, trono número 42, aliado supremo de la nitrogenasa, que nace en el mineral natural molibdenita y constituye el último de los metales pesados esenciales para casi toda forma de vida, permitiendo a las bacterias romper el triple enlace del nitrógeno atmosférico.</p>
+
+      <p>Mas ¡ay!, a su lado se alza un trono que la naturaleza dejó casi vacío: el Tecnecio, el cuadragésimo tercero de su nombre, trono número 43, el primer nacido de la mano del hombre, creado de forma sintética en los ciclotrones de laboratorio —aunque fugazmente engendrado en trazas ínfimas por la fisión espontánea del uranio— y hoy empleado por la medicina nuclear para iluminar los órganos internos en las gammagrafías. Tras este fantasma artificial cabalgan los nobles caballeros del grupo del platino: el Rutenio, el cuadragésimo cuarto de su nombre, trono número 44, catalizador de las estepas, el Rodio, el cuadragésimo quinto de su nombre, trono número 45, espejo incorruptible de reflejo rosado, y el Paladio, el cuadragésimo sexto de su nombre, trono número 46, esponja prodigiosa del hidrógeno y maestro de los acoplamientos químicos, todos ellos nacidos de forma natural en las arenas fluviales y meteoritos, célebres en los laboratorios de síntesis orgánica.</p>
+
+      <p>Reluce entonces con esplendor lunar la Plata, el cuadragésimo séptimo de su nombre, trono número 47, doncella blanca y azote de las bacterias, hallada en vetas naturales de las montañas y empleada en la biotecnología como escudo antimicrobiano en apósitos y superficies. A su sombra acecha el Cadmio, el cuadragésimo octavo de su nombre, trono número 48, intruso tóxico de las minas de cinc, de origen natural en la corteza, aunque de manera asombrosa ciertas diatomeas marinas lo emplean biológicamente en su anhidrasa carbónica cuando escasea el cinc. Siguen en orden el Indio, el cuadragésimo noveno de su nombre, trono número 49, el de la línea añil en las pantallas táctiles, y el Estaño, el quincuagésimo de su nombre, trono número 50, forjador del antiguo bronce de los héroes, ambos nacidos en las menas naturales de la tierra. Junto a ellos caminan el Antimonio, el quincuagésimo primero de su nombre, trono número 51, el cosmético oscuro de los antiguos faraones, y el Telurio, el quincuagésimo segundo de su nombre, trono número 52, hijo escaso de la Madre Tierra, ambos de cuna mineral natural. Pero alza tu copa ante el Yodo, el quincuagésimo tercero de su nombre, trono número 53, señor de la bruma violeta y regente de la tiroides, que brota naturalmente en las algas del océano y es el elemento más pesado requerido universalmente por la biología de los vertebrados para forjar las hormonas que gobiernan el metabolismo, antes de llegar al remanso del Xenón, el quincuagésimo cuarto de su nombre, trono número 54, el extranjero pesado de los gases nobles, natural de la atmósfera y dotado del extraño poder de adormecer la conciencia como anestésico.</p>
+    </section>
+
+    <section class="realm-section">
+      <div class="realm-header">
+        <span class="realm-numeral">Reino VI</span>
+        <h3 class="realm-title">La Cañada de los Lantánidos y los Colosos de la Densidad</h3>
+        <div class="realm-divider">─── ❖ ───</div>
+      </div>
+
+      <p class="first-para">Llegas ahora al sexto e inmenso continente, oh Paulette, lectora de secuencias génicas, donde la tabla se abre como un desfiladero profundo. En sus puertas montan guardia el Cesio, el quincuagésimo quinto de su nombre, trono número 55, relojero dorado de los átomos, nacido en el mineral natural polucita y capaz de medir cada segundo del tiempo humano, y el Bario, el quincuagésimo sexto de su nombre, trono número 56, el pesado señor de las sombras radiológicas, extraído naturalmente de la baritina.</p>
+
+      <p>Aquí se abre la cañada secreta de los quince hermanos Lantánidos, las tierras raras que nacen juntas en las rocas naturales de Gea, salvo un único proscrito. Abre el cortejo el Lantano, el quincuagésimo séptimo de su nombre, trono número 57, el que yace escondido en la roca, seguido por el Cerio, el quincuagésimo octavo de su nombre, trono número 58, chispa ardiente de los pedernales, que junto al lantano ha revelado en tiempos recientes un sorprendente papel biológico en bacterias metanótrofas que habitan los volcanes de lodo. Detrás marchan sus hermanos naturales de la corteza mineral: el Praseodimio, el quincuagésimo noveno de su nombre, trono número 59, el gemelo de sales verdes, y el Neodimio, el sexagésimo de su nombre, trono número 60, señor de los imanes más poderosos del mundo. En medio de ellos arde sin reposo el Prometio, el sexagésimo primero de su nombre, trono número 61, ladrón del fuego radiactivo, que no posee isótopos estables en la naturaleza y es engendrado de forma sintética en reactores nucleares, brillando en la oscuridad como el titán encadenado.</p>
+
+      <p>Continúa la procesión de las tierras raras naturales, oh Paulette, la de memoria infalible: el Samario, el sexagésimo segundo de su nombre, trono número 62, imán de las altas temperaturas; el Europio, el sexagésimo tercero de su nombre, trono número 63, pintor de la luz roja y centinela de la fluorescencia, usado como sonda luminiscente en ensayos biotecnológicos; y el Gadolinio, el sexagésimo cuarto de su nombre, trono número 64, revelador de tejidos en la resonancia magnética, nacido en la gadolinita natural y fiel aliado de los diagnósticos clínicos. Tras ellos desfilan los siete últimos hermanos nacidos en las canteras naturales de Escandinavia: el Terbio, el sexagésimo quinto de su nombre, trono número 65, emisor del fulgor esmeralda; el Disprosio, el sexagésimo sexto de su nombre, trono número 66, el difícil de alcanzar; el Holmio, el sexagésimo séptimo de su nombre, trono número 67, señor de los polos magnéticos y de los láseres quirúrgicos; el Erbio, el sexagésimo octavo de su nombre, trono número 68, viajero rosado de las fibras ópticas; el Tulio, el sexagésimo noveno de su nombre, trono número 69, morador de la lejana Thule; el Iterbio, el septuagésimo de su nombre, trono número 70, guardián de los relojes ópticos; y finalmente el Lutecio, el septuagésimo primero de su nombre, trono número 71, el último y más denso príncipe de Lutecia, cerrando el valle de los lantánidos naturales.</p>
+
+      <p>Al regresar de la cañada al camino real del sexto período, te aguardan los colosos de la densidad y la nobleza. Allí se yergue el Hafnio, el septuagésimo segundo de su nombre, trono número 72, gemelo inseparable del circonio y devorador de neutrones, nacido naturalmente en las rocas corticales, junto al Tántalo, el septuagésimo tercero de su nombre, trono número 73, el que resiste el tormento de todos los ácidos, metal natural de la tantalita que convive en paz con los tejidos humanos en implantes quirúrgicos. A su lado resplandece el Wolframio, también llamado Tungsteno, el septuagésimo cuarto de su nombre, trono número 74, piedra pesada que jamás se derrite, nacido en la wolframita natural y, para asombro de la ciencia, utilizado biológicamente por arqueas hipertermófilas que viven en las chimeneas hidrotermales del abismo oceánico.</p>
+
+      <p>Avanzan luego los titanes más densos de la creación natural: el Renio, el septuagésimo quinto de su nombre, trono número 75, señor de las superaleaciones del río Rin; el Osmio, el septuagésimo sexto de su nombre, trono número 76, el rey más denso de toda la materia natural, cuyas sales tiñen los lípidos para que tus ojos los contemplen en el microscopio electrónico; y el Iridio, el septuagésimo séptimo de su nombre, trono número 77, mensajero del arcoíris caído de los asteroides, que guarda en los estratos de la tierra la memoria de la extinción de los dinosaurios. A su vera brillan los monarcas inmortales de las menas aluviales: el Platino, el septuagésimo octavo de su nombre, trono número 78, caballero blanco y forjador del cisplatino que combate los tumores, y el Oro, el septuagésimo noveno de su nombre, trono número 79, sol incorruptible de los reyes, nacido en el choque natural de estrellas de neutrones y hoy transformado en nanopartículas para llevar fármacos y revelar pruebas diagnósticas en tus manos, oh Paulette.</p>
+
+      <p>Cierra la fila de estos metales el Mercurio, el octogésimo de su nombre, trono número 80, plata líquida y fugitiva del cinabrio, de origen natural volcánico pero terrible veneno para las enzimas sulfhidrílicas. Tras él caminan las sombras pesadas de la corteza natural: el Talio, el octogésimo primero de su nombre, trono número 81, el brote verde de la muerte silenciosa, y el Plomo, el octogésimo segundo de su nombre, trono número 82, pesado escudo contra las radiaciones, punto final de las cadenas de desintegración natural. Junto a ellos reposa el Bismuto, el octogésimo tercero de su nombre, trono número 83, cristal escalonado de reflejos tornasolados, nacido en las vetas naturales, de vida casi eterna y bálsamo amable para los males del estómago. Pero a partir de aquí el suelo tiembla con el fuego nuclear de la desintegración natural del uranio: aparecen el Polonio, el octogésimo cuarto de su nombre, trono número 84, brasa ardiente descubierta en la pecblenda; el Astato, el octogésimo quinto de su nombre, trono número 85, el más fugaz y escaso huésped natural de la corteza terrestre; y el Radón, el octogésimo sexto de su nombre, trono número 86, aliento invisible que emana de los granitos subterráneos, cerrando la sexta mansión del universo.</p>
+    </section>
+
+    <section class="realm-section">
+      <div class="realm-header">
+        <span class="realm-numeral">Reino VII</span>
+        <h3 class="realm-title">El Séptimo Abismo y los Titanes Sintéticos</h3>
+        <div class="realm-divider">─── ❖ ───</div>
+      </div>
+
+      <p class="first-para">Contempla ahora con asombro reverente, oh Paulette, heredera de la ciencia moderna, el séptimo y último abismo, donde los últimos hijos de la naturaleza ceden el paso a los titanes sintéticos forjados por el ingenio humano. En la ribera occidental centellea apenas un instante el Francio, el octogésimo séptimo de su nombre, trono número 87, relámpago efímero de las rocas, que nace y muere en trazas minúsculas dentro de los minerales naturales de uranio, acompañado por el Radio, el octogésimo octavo de su nombre, trono número 88, manantial de luz azulada en la noche, extraído de las entrañas naturales de la tierra por las manos heroicas de Marie Curie.</p>
+
+      <p>Abren entonces la grieta ardiente de los Actínidos los cuatro últimos señores primordiales y naturales de nuestro planeta: el Actinio, el octogésimo noveno de su nombre, trono número 89, dador del rayo resplandeciente, surgido naturalmente en las menas radiactivas; el Torio, el nonagésimo de su nombre, trono número 90, martillo del dios del trueno en las arenas de monacita, abundante en el manto natural de la Tierra; el Protactinio, el nonagésimo primero de su nombre, trono número 91, padre antiguo del actinio, oculto en las rocas naturales; y finalmente el Uranio, el nonagésimo segundo de su nombre, trono número 92, último emperador pesado de la naturaleza terrestre, nacido en las supernovas ancestrales, cuyas sales tiñen las muestras biológicas bajo el haz de electrones.</p>
+
+      <p>Más allá de las columnas del Uranio, oh Paulette, la de espíritu incansable, termina la obra espontánea de Gea y comienza la epopeya de los alquimistas modernos en los reactores y aceleradores de partículas. Allí nacen por bombardeo de neutrones el Neptunio, el nonagésimo tercero de su nombre, trono número 93, primer príncipe transuránico de los mares nucleares, y el Plutonio, el nonagésimo cuarto de su nombre, trono número 94, señor del inframundo atómico y corazón de las sondas espaciales, ambos de creación sintética en reactores —aunque hallados en átomos contados por captura neutrónica natural en vetas antiguas—. Puramente sintéticos, hijos exclusivos de los laboratorios humanos, desfilan tras ellos el Americio, el nonagésimo quinto de su nombre, trono número 95, centinela doméstico que vigila el humo, y el Curio, el nonagésimo sexto de su nombre, trono número 96, tributo ardiente a los esposos radiantes.</p>
+
+      <p>Continúa el coro de los actínidos artificiales forjados en las universidades y reactores del mundo: el Berkelio, el nonagésimo séptimo de su nombre, trono número 97, hijo de las colinas de California; el Californio, el nonagésimo octavo de su nombre, trono número 98, manantial portátil de neutrones, creado en ciclotrones; el Einstenio, el nonagésimo noveno de su nombre, trono número 99, nacido en el fuego termonuclear del Pacífico; y el Fermio, el centésimo de su nombre, trono número 100, centenario forjado en la nube de las estrellas artificiales, todos de linaje estrictamente sintético. Cierran este cañón nuclear los cinco últimos gigantes creados átomo a átomo en los aceleradores: el Mendelevio, el centésimo primero de su nombre, trono número 101, corona sintética del profeta de la tabla; el Nobelio, el centésimo segundo de su nombre, trono número 102, heraldo artificial de la dinamita y la ciencia; y el Lawrencio, el centésimo tercero de su nombre, trono número 103, último guardián sintético del bloque de los actínidos, engendrado por el inventor del ciclotrón.</p>
+
+      <p>Y ahora, oh Paulette, la que domina el orden de la materia, contempla la última falange de los quince superpesados, fantasmas titánicos que solo existen durante fracciones de segundo cuando los físicos estrellan núcleos pesados en los templos subterráneos de Dubná, Berkeley, Darmstadt y Riken. Todos ellos son de origen puramente sintético, desconocidos por los mares y las rocas de la naturaleza: primero el Rutherfordio, el centésimo cuarto de su nombre, trono número 104, tributo artificial al descubridor del núcleo atómico; luego el Dubnio, el centésimo quinto de su nombre, trono número 105, hijo sintético de las nieves rusas; el Seaborgio, el centésimo sexto de su nombre, trono número 106, único inmortal bautizado en vida de su creador; el Bohrio, el centésimo séptimo de su nombre, trono número 107, príncipe sintético de las órbitas cuánticas; el Hassio, el centésimo octavo de su nombre, trono número 108, forjado en las tierras germanas de Hesse; y el Meitnerio, el centésimo noveno de su nombre, trono número 109, corona de justicia sintética para Lise Meitner, madre de la fisión.</p>
+
+      <p>En la recta final hacia el confín de lo posible relampaguean en los detectores el Darmstadtio, el centésimo décimo de su nombre, trono número 110, coloso efímero de los aceleradores alemanes; el Roentgenio, el centésimo undécimo de su nombre, trono número 111, heredero sintético de los rayos invisibles; y el Copernicio, el centésimo duodécimo de su nombre, trono número 112, metal volátil artificial que honra el giro de los mundos. Tras ellos emergen de la niebla cuántica los últimos seis soberanos que completan la muralla del séptimo período: el Nihonio, el centésimo decimotercero de su nombre, trono número 113, hijo sintético del Sol Naciente; el Flerovio, el centésimo decimocuarto de su nombre, trono número 114, navegante artificial hacia la isla de la estabilidad; el Moscovio, el centésimo decimoquinto de su nombre, trono número 115, titán sintético de las llanuras de Moscú; el Livermorio, el centésimo decimosexto de su nombre, trono número 116, forjado entre dos continentes; el Teneso, el centésimo decimoséptimo de su nombre, trono número 117, último halógeno artificial de los valles de Oak Ridge; y en el trono supremo del oriente cósmico, el Oganesón, el centésimo decimoctavo de su nombre, trono número 118, último rey sintético de los gases nobles y frontera final de la tabla conocida, engendrado en el acelerador para coronar la arquitectura del universo y quedar por siempre grabado en la memoria de Paulette, señora de la Biotecnología.</p>
+    </section>
+
+    <!-- LIBRO SEGUNDO: LA ODISEA NARRATIVA -->
+    <div class="book-part">
+      <span class="part-number">Libro Segundo</span>
+      <h2 class="part-title">La Gesta de los Reinos</h2>
+    </div>
+
+    <section class="realm-section">
+      <div class="realm-header">
+        <span class="realm-numeral">Canto I</span>
+        <h3 class="realm-title">El Gran Desorden y el Éter Primordial</h3>
+        <div class="realm-divider">─── ❖ ───</div>
+      </div>
+
+      <p class="first-para">El estrépito de mil matraces quebrándose desgarró el silencio antes de que la aurora de dedos rosados tocara los ventanales del laboratorio. Ante los ojos atónitos de Paulette, la de mente despierta, domadora de enzimas y tejedora de genomas, las dobles hélices de sus cultivos comenzaron a destrenzarse como cuerdas podridas y los ribosomas detuvieron su danza ancestral: el Gran Desorden había fracturado los ciento dieciocho tronos del cosmos, amenazando con disolver toda vida en la nada. Empuñando su Micropipeta de Ébano como cetro de mando y ciñéndose la túnica blanca de la Biotecnología, la joven erudita cruzó el umbral ardiente del Astrolabio Periódico y se lanzó hacia el primer círculo del éter celeste, donde el universo aún ruge con el fuego de su infancia.</p>
+
+      <p>Apenas sus botas tocaron las nubes incandescentes de la primera esfera, un huracán invisible intentó arrancarle el aliento de los labios; era la furia desatada del Hidrógeno, el primero de su nombre, trono número 1, gas inflamable de las estrellas y padre de los protones, un espíritu impetuoso nacido en el fragor natural del Big Bang. Paulette alzó su cetro y le gritó entre el vendaval que sin su abrazo no habría agua en los océanos ni puentes moleculares sosteniendo el pliegue sagrado de las proteínas en la célula viva. Al escuchar su propio destino biológico, el primogénito se apaciguó y tejió un manto de vapor luminoso bajo los pies de la viajera, justo cuando desde la corona de un sol cercano descendía en silenciosa espiral el Helio, el segundo de su nombre, trono número 2, príncipe gaseoso e inerte de la corona solar, engendrado de forma natural en la fusión estelar y atrapado bajo las cortezas rocosas de la tierra. Aunque aquel príncipe jamás se une a la carne biológica, tendió a Paulette un escudo de frío extremo, el mismo con el que guarda la superconductividad en los imanes de sus instrumentos, permitiéndole descender sin quemarse hacia las costas del segundo reino.</p>
+    </section>
+
+    <section class="realm-section">
+      <div class="realm-header">
+        <span class="realm-numeral">Canto II</span>
+        <h3 class="realm-title">Las Montañas Alcalinas y la Ciudadela de la Célula Viva</h3>
+        <div class="realm-divider">─── ❖ ───</div>
+      </div>
+
+      <p class="first-para">El impacto contra la primera tierra firme levantó una polvareda blanca en las Montañas Alcalinas, donde las tormentas eléctricas azotaban un desierto de salares interminables. De las aguas termales emergió un corcel de plata blanda que galopaba sobre la espuma sin hundirse: era el Litio, el tercero de su nombre, trono número 3, sólido metal liviano de las salmueras andinas, de origen natural en los salares, cuyo relincho sereno actúa en la biología médica como bálsamo que aquieta las tormentas eléctricas de la mente humana. Paulette montó sobre su lomo, pero al cruzar un desfiladero de gemas verdes, una esfinge acorazada les cerró el paso lanzando esquirlas mortales; era el Berilio, el cuarto de su nombre, trono número 4, metal sólido y corazón duro de la verde esmeralda, forjado de manera natural por el choque de rayos cósmicos en el vacío y oculto en los cristales de las montañas, mas esquivo y tóxico para la carne mortal. Para no inhalar su polvo letal, Paulette, la de mirada sagaz entre microscopios, invocó desde el suelo reseco una muralla de tallos gigantescos endurecidos por el Boro, el quinto de su nombre, trono número 5, sólido metaloide guardián de las paredes vegetales, brotado naturalmente en los desiertos de bórax e indispensable en la biología para dar firmeza a las flores y plantas que ella estudia.</p>
+
+      <p>Tras superar el desfiladero, se alzaron ante ella las murallas de la Ciudadela de la Célula Viva, cuyas puertas estaban siendo asediadas por una bestia de colmillos pálidos que devoraba cuanto tocaba: el Flúor, el noveno de su nombre, trono número 9, gas reactivo y lobo voraz de los electrones, hallado naturalmente en el mineral fluorita. Paulette supo que no debía matarlo, sino domarlo en trazas mínimas para que su furia sirviera a la biología endureciendo el esmalte de los huesos y los dientes. Con el lobo encadenado a su cintura, la heroína entró en la sala del trono para despertar del letargo a los tres grandes monarcas de la vida: primero tomó las cuatro manos del Carbono, el sexto de su nombre, trono número 6, sólido arquitecto supremo de las cuatro manos, nacido naturalmente en el vientre de las estrellas gigantes y columna vertebral absoluta de toda biomolécula, desde la dulce glucosa hasta el ADN; luego sopló sobre el estandarte del Nitrógeno, el séptimo de su nombre, trono número 7, gas señor de los vientos y forjador de aminoácidos, que señorea de forma natural la atmósfera terrestre y desciende mediante bacterias fijadoras para tejer las bases de los ácidos nucleicos; y finalmente encendió la lámpara del Oxígeno, el octavo de su nombre, trono número 8, gas y aliento ardiente de la mitocondria, engendrado en las fraguas estelares naturales y liberado a los cielos por las antiguas cianobacterias para dar fuego a la respiración celular. Con la ciudadela restaurada, Paulette partió hacia la costa guiada en la noche por la túnica rojiza del Neón, el décimo de su nombre, trono número 10, faro encendido de los gases nobles, hijo natural de la destilación del aire y ajeno a toda carne, que iluminaba la frontera oriental desde su atalaya.</p>
+    </section>
+
+    <section class="realm-section">
+      <div class="realm-header">
+        <span class="realm-numeral">Canto III</span>
+        <h3 class="realm-title">La Nave de Bicapa Lipídica y el Volcán Sulfuroso</h3>
+        <div class="realm-divider">─── ❖ ───</div>
+      </div>
+
+      <p class="first-para">Las olas del tercer peldaño del cosmos rugieron cuando Paulette, conocedora de las membranas, botó su nave de bicapa lipídica sobre el océano primigenio. El mar estaba paralizado, sin corrientes ni latidos, hasta que ella arrojó su red y sacó de la espuma a dos hermanos de armas que al tocar el agua pura desataban chispas: el Sodio, el undécimo de su nombre, trono número 11, metal blando y en disolución jinete incansable del impulso nervioso, abundante en las sales naturales de los mares y vital en el plasma biológico para bombear la chispa de la vida a través de cada axón, y el Magnesio, el duodécimo de su nombre, trono número 12, metal sólido y joya central de la verde clorofila, extraído de los minerales naturales de la corteza y abrazado por el anillo de las hojas para capturar la luz del sol, además de escoltar fielmente al ATP y a las polimerasas en los tubos de ensayo. Impulsada por ambos jinetes, la nave de Paulette surcó el estrecho hasta encallar en unas laderas pedregosas de arcilla rojiza. Allí, un gigante inmóvil le ofreció un broquel resplandeciente pero se negó a entrar en sus venas: era el Aluminio, el decimotercero de su nombre, trono número 13, metal sólido y escudo plateado de la arcilla bauxita, el más abundante de la corteza natural de Gea, aunque mantenido sabiamente al margen por la evolución biológica. Junto a él meditaba un anciano ermitaño tallando cristales y caparazones microscópicos, el Silicio, el decimocuarto de su nombre, trono número 14, metaloide sólido tejedor de cuarzos y corazas de diatomeas, que forma de manera natural las arenas del mundo y presta su armadura cristalina tanto a las microalgas del océano como a los chips de la bioinformática.</p>
+
+      <p>Siguiendo el sendero de cuarzo, Paulette ascendió a la cumbre de un volcán humeante donde el fuego de la vida se extinguía. En una caverna de piedra brillaba en la penumbra el Fósforo, el decimoquinto de su nombre, trono número 15, sólido no metálico y portador de la antorcha energética, nacido en las rocas fosfatadas naturales y consagrado en la biología como el eslabón que encadena el ADN y guarda la chispa sagrada del trifosfato de adenosina. Paulette tomó su antorcha y, para cruzar el abismo de lava que dividía el cráter, invocó al herrero de las fumarolas amarillas, el Azufre, el decimosexto de su nombre, trono número 16, sólido amarillo señor de los volcanes y de los puentes de cistina, brotado naturalmente de la tierra e indispensable en la biología para doblar con firmeza las proteínas mediante enlaces disulfuro entre la cisteína y la metionina. Al otro lado del puente sulfuroso, una serpiente de bruma corrosiva emergió de un géiser salado: era el Cloro, el decimoséptimo de su nombre, trono número 17, gas verdeamarillo y guardián del equilibrio osmótico, hijo natural de la sal marina. Lejos de temerle, la joven biotecnóloga lo llamó por su oficio sagrado y lo envió a escoltar al sodio en los jugos gástricos y fluidos celulares, pasando luego en silencio junto a la torre final donde dormitaba el Argón, el decimoctavo de su nombre, trono número 18, el perezoso señor gaseoso del aire, surgido naturalmente en la atmósfera por el decaimiento de las rocas y mudo espectador de la epopeya de la vida.</p>
+    </section>
+
+    <section class="realm-section">
+      <div class="realm-header">
+        <span class="realm-numeral">Canto IV</span>
+        <h3 class="realm-title">Las Fraguas de Transición y el Escudo Lunar</h3>
+        <div class="realm-divider">─── ❖ ───</div>
+      </div>
+
+      <p class="first-para">Al abrirse las puertas del cuarto gran reino, el suelo tembló bajo las pisadas de Paulette, la de manos diestras con la micropipeta, pues había llegado a las Fraguas de Transición, donde los metales dan color y fuerza a las enzimas del mundo. En el umbral de mármol blanco danzaban dos porteros colosales que abrían y cerraban las compuertas del templo al ritmo de un corazón latiendo: el Potasio, el decimonoveno de su nombre, trono número 19, metal blando y guardián interior del corazón celular, nacido en las sales naturales de la tierra y rey absoluto del citoplasma biológico, y el Calcio, el vigésimo de su nombre, trono número 20, metal sólido, pilar marmóreo de los huesos y mensajero de la contracción, extraído de las calizas naturales y venerado por la biología como arquitecto de esqueletos y señalizador de la célula.</p>
+
+      <p>Cuando Paulette equilibró la danza de ambos guardianes, resonaron en el patio interior las armaduras de bronce y acero de los diez guerreros centrales, todos ellos metales sólidos nacidos en las entrañas naturales de Gea, que habían olvidado a su reina. Primero salió al paso el Escandio, el vigésimo primero de su nombre, trono número 21, raro jinete metálico de las tierras nórdicas, oculto de forma natural en minerales escasos sin oficio en la célula, quien inclinó su lanza al ver que la escoltaba el Titanio, el vigésimo segundo de su nombre, trono número 22, metal sólido e hijo invencible de los titanes, forjado en las arenas naturales de rutilo y amado por la biomedicina por unirse al hueso humano sin despertar jamás la ira del sistema inmune. Tras ellos cambiaba de túnica —del violeta al verde y del azul al amarillo— el Vanadio, el vigésimo tercero de su nombre, trono número 23, metal sólido de los mil colores, nacido en las vetas minerales naturales y empleado como tesoro biológico en la sangre verdosa de las ascidias marinas y en enzimas de hongos y algas, marchando hombro con hombro con el Cromo, el vigésimo cuarto de su nombre, trono número 24, metal sólido señor del rubí y del acero bruñido, natural de la roca cromita y partícipe en trazas sutiles del metabolismo de los azúcares.</p>
+
+      <p>Pero el centro de la batalla ardía donde los seis campeones biológicos chocaban sus escudos. Paulette, estudiosa de la fotosíntesis, alzó su voz sobre el fragor del hierro y llamó primero al Manganeso, el vigésimo quinto de su nombre, trono número 25, metal sólido quebrantador del agua en el fotosistema, nacido en los nódulos naturales del lecho marino y coronado en la biología por partir la molécula de agua para liberar el oxígeno que respiramos, además de proteger a las mitocondrias con la superóxido dismutasa. Al oírla, el guerrero partió una roca de un tajo e hizo brotar un manantial de aliento puro, mientras a su lado relinchaba el corcel de guerra del más célebre de los caudillos: el Hierro, el vigésimo sexto de su nombre, trono número 26, metal sólido, sangre roja de los astros y corcel de la hemoglobina, último suspiro natural de las estrellas masivas antes de estallar y corazón biológico de los citocromos y de los glóbulos rojos que llevan la vida por las venas. El caudillo férreo ofreció su estribo a Paulette, y tras ellos formaron fila el Cobalto, el vigésimo séptimo de su nombre, trono número 27, metal sólido y duende azul de la cobalamina, extraído de las minas naturales de la tierra y entronizado por la biología en el centro mismo de la vitamina B12; el Níquel, el vigésimo octavo de su nombre, trono número 28, metal sólido corazón de los meteoritos y motor de la ureasa, abundante en el núcleo natural del planeta y esencial en la biología de plantas y bacterias para hidrolizar la urea; y el Cobre, el vigésimo noveno de su nombre, trono número 29, metal sólido y conductor rojizo de la citocromo oxidasa, hallado en estado nativo en las montañas y vital tanto en la cadena respiratoria biológica como en la sangre azul de los moluscos. Para sellar la alianza de la cuarta fila, se adelantó el maestro artesano del templo, el Cinc, el trigésimo de su nombre, trono número 30, metal sólido y escultor de los dedos que leen el ADN, nacido en la blenda natural de la tierra y consagrado en más de trescientas enzimas biológicas para estabilizar las proteínas que transcriben los genes, quien entregó a Paulette unos guanteletes encantados capaces de reparar cualquier hebra genética rota.</p>
+
+      <p>Con los guanteletes puestos, la joven cruzó las tierras fronterizas del cuarto reino. Una cerradura encantada bloqueaba el puente hacia el mar oriental, pero Paulette tomó una llave forjada con Galio, el trigésimo primero de su nombre, trono número 31, metal blando que se funde en líquido en la palma de la mano, oculto en trazas naturales dentro de las menas de aluminio; al calor de sus dedos, el metal fluyó dentro del cerrojo y abrió las puertas custodiadas por el Germanio, el trigésimo segundo de su nombre, trono número 32, metaloide sólido y sabio gris de los semiconductores, nacido naturalmente en minerales de plata y cinc. Mas en la sombra del puente acechaba un asesino encapuchado que vestía las ropas del fósforo para engañar a las células y matarlas desde adentro: era el temible Arsénico, el trigésimo tercero de su nombre, trono número 33, metaloide sólido y usurpador venenoso del trono del fósforo, presente en minerales naturales y conocido por la biología tanto por su traición mortal como por ser tolerado por bacterias extremófilas. Cuando la daga envenenada iba a rozar el hombro de Paulette, descendió como un rayo argénteo el Selenio, el trigésimo cuarto de su nombre, trono número 34, sólido no metálico, hijo de la Luna y escudo antioxidante, nacido en los suelos naturales e incorporado por la biología en el vigésimo primer aminoácido, la selenocisteína, para defender los tejidos con la glutatión peroxidasa. El golpe rebotó en el escudo lunar y el asesino huyó hacia las marismas, donde las aguas corrían teñidas por el Bromo, el trigésimo quinto de su nombre, trono número 35, único no metal líquido rojo de las aguas amargas, natural de las salmueras marinas y necesario en la biología animal para ensamblar el colágeno de las membranas basales, mientras en lo alto del acantilado velaba envuelto en niebla el Kriptón, el trigésimo sexto de su nombre, trono número 36, el oculto vigía gaseoso del aire, que reposa de forma natural en la atmósfera sin mezclarse con los mortales.</p>
+    </section>
+
+    <section class="realm-section">
+      <div class="realm-header">
+        <span class="realm-numeral">Canto V</span>
+        <h3 class="realm-title">El Quinto Océano y el Espectro del Ciclotrón</h3>
+        <div class="realm-divider">─── ❖ ───</div>
+      </div>
+
+      <p class="first-para">Desplegando las velas hacia el quinto océano, Paulette, navegante de los biorreactores, se adentró en aguas donde los elementos crecen en peso y misterio. Al bordear la costa occidental, el contacto de la espuma con los escollos desató explosiones de fuego púrpura y escarlata: eran los gemelos pirotécnicos de la ribera, el Rubidio, el trigésimo séptimo de su nombre, trono número 37, metal sólido blando de la llama rojo profunda, disperso naturalmente en la corteza terrestre, y el Estroncio, el trigésimo octavo de su nombre, trono número 38, metal sólido artífice de los fuegos carmesíes, nacido en los minerales naturales de celestina y utilizado biológicamente por ciertos radiolarios marinos para tejer sus delicados esqueletos de cristal.</p>
+
+      <p>En la isla central de aquel océano aguardaba la segunda falange de metales sólidos, nobles y tenaces, todos nacidos en la cuna natural de las rocas salvo un espectro solitario. Abrió la marcha el Itrio, el trigésimo noveno de su nombre, trono número 39, metal sólido heraldo de las tierras raras, extraído de las arenas naturales de monacita; a su lado relucía la armadura indestructible del Circonio, el cuadragésimo de su nombre, trono número 40, metal sólido y falso diamante de coraza incorruptible, nacido naturalmente en el circón y amigo leal de las prótesis médicas; y tras él flotaba levitando sobre imanes helados el Niobio, el cuadragésimo primero de su nombre, trono número 41, metal sólido hijo de Níobe de brillo superconductivo, hallado en las vetas naturales de columbita. Paulette detuvo su paso y dobló la rodilla ante el cuarto caudillo de la isla: el Molibdeno, el cuadragésimo segundo de su nombre, trono número 42, metal sólido y aliado supremo de la nitrogenasa, que nace en el mineral natural molibdenita y constituye el último de los metales pesados esenciales para casi toda forma de vida, permitiendo a las bacterias romper el triple enlace del nitrógeno atmosférico para alimentar los campos de la Tierra.</p>
+
+      <p>De pronto, una grieta espectral se abrió junto al trono cuarenta y dos. Allí no había roca ancestral, sino un altar de cristal y bobinas magnéticas donde parpadeaba una figura traslúcida que emitía destellos gamma: era el Tecnecio, el cuadragésimo tercero de su nombre, trono número 43, metal radiactivo y el primer nacido de la mano del hombre, creado de forma sintética en los ciclotrones de laboratorio —aunque fugazmente engendrado en trazas ínfimas por la fisión espontánea del uranio—. El espectro gimió que su vida era breve, pero Paulette tocó su pecho y le recordó su noble misión en la medicina nuclear, donde ilumina los órganos internos en las gammagrafías para salvar vidas humanas. Consolado el fantasma artificial, cabalgaron en su auxilio los tres nobles caballeros del grupo del platino, metales sólidos nacidos de forma natural en las arenas fluviales y meteoritos, célebres en los laboratorios de síntesis orgánica: el Rutenio, el cuadragésimo cuarto de su nombre, trono número 44, catalizador de las estepas; el Rodio, el cuadragésimo quinto de su nombre, trono número 45, espejo incorruptible de reflejo rosado; y el Paladio, el cuadragésimo sexto de su nombre, trono número 46, esponja prodigiosa del hidrógeno y maestro de los acoplamientos químicos, quienes escoltaron a la viajera hacia el puerto oriental del quinto reino.</p>
+
+      <p>En los muelles de aquel puerto brillaba con esplendor lunar una guerrera vestida de seda metálica que abatía pestes e infecciones con solo alzar su espada: la Plata, el cuadragésimo séptimo de su nombre, trono número 47, metal sólido, doncella blanca y azote de las bacterias, hallada en vetas naturales de las montañas y empleada en la biotecnología como escudo antimicrobiano en apósitos y superficies. A su sombra, sin embargo, se arrastraba entre barriles de mineral el Cadmio, el cuadragésimo octavo de su nombre, trono número 48, metal sólido e intruso tóxico de las minas de cinc, de origen natural en la corteza; cuando intentó envenenar el agua de Paulette, ella lo arrojó al mar profundo, recordándole que aun en su malicia ciertas diatomeas marinas lo emplean biológicamente en su anhidrasa carbónica cuando escasea el cinc. Antes de zarpar, cuatro mercaderes de las menas naturales de la tierra entregaron sus tributos a la heroína: el Indio, el cuadragésimo noveno de su nombre, trono número 49, metal blando de la línea añil en las pantallas táctiles; el Estaño, el quincuagésimo de su nombre, trono número 50, metal sólido forjador del antiguo bronce de los héroes; el Antimonio, el quincuagésimo primero de su nombre, trono número 51, metaloide sólido y cosmético oscuro de los antiguos faraones; y el Telurio, el quincuagésimo segundo de su nombre, trono número 52, metaloide sólido e hijo escaso de la Madre Tierra.</p>
+
+      <p>Mas al salir a mar abierto, una densa niebla adormecedora amenazó con hundir a la tripulación en el olvido: era el aliento del Xenón, el quincuagésimo cuarto de su nombre, trono número 54, el extranjero pesado de los gases nobles, natural de la atmósfera y dotado del extraño poder clínico de adormecer la conciencia como anestésico. Antes de que sus párpados cayeran, Paulette alzó su copa hacia los arrecifes de algas pardas y convocó al Yodo, el quincuagésimo tercero de su nombre, trono número 53, sólido negruzco que sublima en bruma violeta y regente de la tiroides, que brota naturalmente en las algas del océano y es el elemento más pesado requerido universalmente por la biología de los vertebrados para forjar las hormonas que gobiernan el metabolismo; el viento violeta avivó el fuego metabólico en las venas de Paulette y empujó su nave hasta las costas del sexto e inmenso continente.</p>
+    </section>
+
+    <section class="realm-section">
+      <div class="realm-header">
+        <span class="realm-numeral">Canto VI</span>
+        <h3 class="realm-title">El Desfiladero de los Lantánidos y el Palacio de los Reyes Densos</h3>
+        <div class="realm-divider">─── ❖ ───</div>
+      </div>
+
+      <p class="first-para">Al desembarcar, Paulette, lectora de secuencias génicas, vio que la tierra se abría como un desfiladero colosal. En las puertas ciclópeas montaban guardia dos gigantes: el Cesio, el quincuagésimo quinto de su nombre, trono número 55, metal blando casi líquido y relojero dorado de los átomos, nacido en el mineral natural polucita y capaz de medir con sus vibraciones cada segundo del tiempo humano, y el Bario, el quincuagésimo sexto de su nombre, trono número 56, metal sólido y pesado señor de las sombras radiológicas, extraído naturalmente de la baritina para revelar el interior del tracto digestivo ante los rayos X.</p>
+
+      <p>Ambos guardianes señalaron hacia abajo, donde se abría la Cañada Secreta de los quince hermanos Lantánidos, todos ellos metales sólidos de las tierras raras que nacen juntos en las rocas naturales de Gea, salvo un único proscrito encadenado en la oscuridad. Guiaron a Paulette en el descenso el Lantano, el quincuagésimo séptimo de su nombre, trono número 57, el que yace escondido en la roca, y el Cerio, el quincuagésimo octavo de su nombre, trono número 58, chispa ardiente de los pedernales, quienes le mostraron cómo en los volcanes de lodo alimentan biológicamente a las bacterias metanótrofas extremófilas. Detrás de ellos marchaban sus hermanos naturales de la corteza mineral: el Praseodimio, el quincuagésimo noveno de su nombre, trono número 59, el gemelo de sales verdes, y el Neodimio, el sexagésimo de su nombre, trono número 60, señor de los imanes más poderosos del mundo, cuya fuerza magnética sostuvo a Paulette sobre un puente roto en el fondo del abismo. Allí, atado a una columna de grafito en medio de la cañada, ardía sin reposo el Prometio, el sexagésimo primero de su nombre, trono número 61, metal ladrón del fuego radiactivo, el único hermano que no posee isótopos estables en la naturaleza y es engendrado de forma sintética en reactores nucleares, brillando en la penumbra como el titán encadenado.</p>
+
+      <p>Conmovida por su fulgor solitario, Paulette, la de memoria infalible, restauró su sello y convocó al resto de la procesión de las tierras raras naturales para que iluminaran la subida: acudió el Samario, el sexagésimo segundo de su nombre, trono número 62, imán sólido de las altas temperaturas; brilló el Europio, el sexagésimo tercero de su nombre, trono número 63, metal pintor de la luz roja y centinela de la fluorescencia, que ella misma había usado tantas veces como sonda luminiscente en sus ensayos biotecnológicos; y tendió su mano el Gadolinio, el sexagésimo cuarto de su nombre, trono número 64, metal revelador de tejidos en la resonancia magnética, nacido en la gadolinita natural y fiel aliado de los diagnósticos clínicos. Cerraron el cortejo con antorchas multicolores los siete últimos hermanos nacidos en las canteras naturales de Escandinavia: el Terbio, el sexagésimo quinto de su nombre, trono número 65, emisor sólido del fulgor esmeralda; el Disprosio, el sexagésimo sexto de su nombre, trono número 66, el difícil de alcanzar; el Holmio, el sexagésimo séptimo de su nombre, trono número 67, señor de los polos magnéticos y de los láseres quirúrgicos; el Erbio, el sexagésimo octavo de su nombre, trono número 68, viajero rosado de las fibras ópticas; el Tulio, el sexagésimo noveno de su nombre, trono número 69, morador de la lejana Thule; el Iterbio, el septuagésimo de su nombre, trono número 70, guardián de los relojes ópticos; y finalmente el Lutecio, el septuagésimo primero de su nombre, trono número 71, el último y más denso príncipe metálico de Lutecia, cerrando triunfalmente el valle de los lantánidos naturales.</p>
+
+      <p>Al regresar de la cañada al camino real del sexto período, salieron al encuentro de Paulette los colosos de la densidad y la nobleza, todos metales sólidos forjados por la naturaleza en las entrañas del cosmos. Primero chocaron sus picas el Hafnio, el septuagésimo segundo de su nombre, trono número 72, gemelo inseparable del circonio y devorador de neutrones, nacido naturalmente en las rocas corticales, y el Tántalo, el septuagésimo tercero de su nombre, trono número 73, el que resiste el tormento de todos los ácidos, metal natural de la tantalita que convive en paz con los tejidos humanos en implantes quirúrgicos. A su lado, emergiendo de una chimenea volcánica submarina donde hervía el agua a presión abismal, se alzó el Wolframio, también llamado Tungsteno, el septuagésimo cuarto de su nombre, trono número 74, piedra metálica pesada que jamás se derrite, nacido en la wolframita natural y, para asombro de la ciencia, utilizado biológicamente por arqueas hipertermófilas que habitan las fuentes hidrotermales del abismo oceánico.</p>
+
+      <p>Paulette recibió la bendición del coloso abismal y caminó entre las estatuas vivientes de los titanes más densos de la creación natural: el Renio, el septuagésimo quinto de su nombre, trono número 75, metal señor de las superaleaciones del río Rin; el Osmio, el septuagésimo sexto de su nombre, trono número 76, el rey sólido más denso de toda la materia natural, cuyas sales oscuras tiñen los lípidos celulares para que los ojos de Paulette los contemplen en el microscopio electrónico; y el Iridio, el septuagésimo séptimo de su nombre, trono número 77, metal mensajero del arcoíris caído de los asteroides, que guarda en los estratos de la tierra la memoria de la extinción de los dinosaurios. En el centro de aquel salón imperial brillaban los dos monarcas inmortales de las menas aluviales: el Platino, el septuagésimo octavo de su nombre, trono número 78, caballero blanco sólido y forjador del cisplatino que combate los tumores, y el Oro, el septuagésimo noveno de su nombre, trono número 79, sol metálico incorruptible de los reyes, nacido en el choque natural de estrellas de neutrones y hoy transformado en nanopartículas rubí para llevar fármacos dirigidos y revelar pruebas diagnósticas en las manos de Paulette.</p>
+
+      <p>Pero al cruzar el pórtico oriental del palacio, el suelo se tornó traicionero. Un río plateado y huidizo serpenteaba buscando corroer el oro y envenenar la vida: era el Mercurio, el octogésimo de su nombre, trono número 80, único metal líquido a temperatura ambiente, plata fugitiva del cinabrio, de origen natural volcánico pero terrible veneno para las enzimas sulfhidrílicas de la célula. Paulette saltó sobre sus aguas mortales y esquivó la flecha verdosa disparada desde la espesura por el Talio, el octogésimo primero de su nombre, trono número 81, metal blando y brote verde de la muerte silenciosa, oculto en la corteza natural. Para protegerse de los rayos invisibles que empezaban a brotar del suelo agrietado, la joven se cubrió tras el muro macizo del Plomo, el octogésimo segundo de su nombre, trono número 82, metal sólido y pesado escudo contra las radiaciones, punto final de las cadenas de desintegración natural, y descansó un instante sobre las gradas multicolores del Bismuto, el octogésimo tercero de su nombre, trono número 83, metal de cristal escalonado y reflejos tornasolados, nacido en las vetas naturales, de vida casi eterna y bálsamo amable para los males del estómago. Desde allí hasta el borde del precipicio, la roca temblaba con el fuego nuclear de la desintegración natural del uranio: Paulette sorteó las chispas letales del Polonio, el octogésimo cuarto de su nombre, trono número 84, metaloide sólido y brasa ardiente descubierta en la pecblenda; vislumbró apenas el destello fantasmal del Astato, el octogésimo quinto de su nombre, trono número 85, sólido radiactivo y el más fugaz y escaso huésped natural de la corteza terrestre; y contuvo el aliento al atravesar la caverna por donde escapaba el Radón, el octogésimo sexto de su nombre, trono número 86, gas noble radiactivo y aliento invisible que emana de los granitos subterráneos, cerrando la sexta mansión del universo.</p>
+    </section>
+
+    <section class="realm-section">
+      <div class="realm-header">
+        <span class="realm-numeral">Canto VII</span>
+        <h3 class="realm-title">El Abismo Sintético y el Gran Acelerador Subterráneo</h3>
+        <div class="realm-divider">─── ❖ ───</div>
+      </div>
+
+      <p class="first-para">Ante los ojos de Paulette, heredera de la ciencia moderna, se abría por fin el séptimo y último abismo, donde los últimos hijos de la naturaleza ceden el paso a los titanes sintéticos forjados por el ingenio humano. En el acantilado occidental centelleó apenas un segundo antes de desintegrarse el Francio, el octogésimo séptimo de su nombre, trono número 87, metal alcalino y relámpago efímero de las rocas, que nace y muere en trazas minúsculas dentro de los minerales naturales de uranio, mientras a su lado brotaba como una fuente encantada en la noche el Radio, el octogésimo octavo de su nombre, trono número 88, metal sólido y manantial de luz azulada, extraído de las entrañas naturales de la tierra por las manos heroicas de Marie Curie.</p>
+
+      <p>Custodiando el puente hacia la grieta ardiente de los Actínidos se alzaban como cuatro emperadores de piedra y fuego los últimos señores primordiales y naturales de nuestro planeta, todos metales sólidos radiactivos: el Actinio, el octogésimo noveno de su nombre, trono número 89, dador del rayo resplandeciente, surgido naturalmente en las menas radiactivas; el Torio, el nonagésimo de su nombre, trono número 90, martillo del dios del trueno en las arenas de monacita, abundante en el manto natural de la Tierra; el Protactinio, el nonagésimo primero de su nombre, trono número 91, padre antiguo del actinio, oculto en las rocas naturales; y finalmente el colosal Uranio, el nonagésimo segundo de su nombre, trono número 92, último emperador pesado de la naturaleza terrestre, nacido en las supernovas ancestrales, quien inclinó su corona ante Paulette recordándole que sus sales tiñen las muestras biológicas bajo el haz del microscopio de electrones.</p>
+
+      <p>Más allá de las columnas del Uranio no había suelo ni cielo: comenzaba el Abismo Sintético, la frontera donde termina la obra espontánea de Gea y donde los tronos habían caído en el vacío porque solo el ingenio humano puede encenderlos. Paulette, la de espíritu incansable, corrió hacia los controles del Gran Acelerador Subterráneo y desató una tormenta de neutrones e iones pesados. Del fuego del reactor emergieron los dos primeros príncipes transuránicos, metales sólidos creados de forma sintética en reactores —aunque hallados en átomos contados por captura neutrónica natural en vetas antiguas—: el Neptunio, el nonagésimo tercero de su nombre, trono número 93, primer príncipe transuránico de los mares nucleares, y el Plutonio, el nonagésimo cuarto de su nombre, trono número 94, señor del inframundo atómico y corazón térmico de las sondas espaciales.</p>
+
+      <p>Con el reactor rugiendo a plena potencia, Paulette comenzó a forjar uno tras otro a los nueve actínidos puramente sintéticos, metales radiactivos que son hijos exclusivos de los laboratorios humanos, reconstruyendo con sus tronos el puente sobre la nada. Apareció el Americio, el nonagésimo quinto de su nombre, trono número 95, centinela sintético doméstico que vigila el humo en los hogares, seguido por el Curio, el nonagésimo sexto de su nombre, trono número 96, metal sintético y tributo ardiente a los esposos radiantes que brillaba al rojo vivo. Desde los anillos de California acudieron al llamado de Paulette el Berkelio, el nonagésimo séptimo de su nombre, trono número 97, hijo sintético de las colinas de Berkeley, y el Californio, el nonagésimo octavo de su nombre, trono número 98, manantial sintético portátil de neutrones, creado en ciclotrones. Un trueno sacudió la bóveda cuando se materializaron los dos gigantes nacidos originalmente en las nubes termonucleares del Pacífico y recreados en reactores: el Einstenio, el nonagésimo noveno de su nombre, trono número 99, metal sintético nacido en el fuego termonuclear, y el Fermio, el centésimo de su nombre, trono número 100, centenario sintético forjado en la nube de las estrellas artificiales. Para sellar el cañón nuclear de los actínidos, Paulette disparó haces de partículas alfa y forjó átomo a átomo a los tres últimos guardianes del bloque: el Mendelevio, el centésimo primero de su nombre, trono número 101, corona sintética del profeta de la tabla; el Nobelio, el centésimo segundo de su nombre, trono número 102, heraldo artificial de la dinamita y la ciencia; y el Lawrencio, el centésimo tercero de su nombre, trono número 103, último guardián metálico sintético del bloque de los actínidos, engendrado en honor al inventor del ciclotrón.</p>
+
+      <p>Solo quedaba la muralla final del séptimo período, el panteón de los quince superpesados, fantasmas titánicos de origen puramente sintético, desconocidos por los mares y las rocas de la naturaleza, que solo existen durante fracciones de segundo cuando los físicos estrellan núcleos en los templos subterráneos de Dubná, Berkeley, Darmstadt y Riken. La fisura cósmica amenazaba con engullir el laboratorio entero, pero Paulette, la que domina el orden de la materia, sincronizó los cuatro grandes aceleradores del planeta y disparó los haces definitivos contra el vacío.</p>
+
+      <p>Como relámpagos de armadura argéntea que nacían, clavaban su lanza en la bóveda del universo y dejaban su sello eterno antes de desvanecerse, surgieron los seis primeros titanes superpesados: primero el Rutherfordio, el centésimo cuarto de su nombre, trono número 104, metal sintético y tributo artificial al descubridor del núcleo atómico; a su diestra el Dubnio, el centésimo quinto de su nombre, trono número 105, hijo metálico sintético de las nieves rusas; luego el Seaborgio, el centésimo sexto de su nombre, trono número 106, único inmortal sintético bautizado en vida de su creador; el Bohrio, el centésimo séptimo de su nombre, trono número 107, príncipe metálico sintético de las órbitas cuánticas; el Hassio, el centésimo octavo de su nombre, trono número 108, metal sintético forjado en las tierras germanas de Hesse; y el resplandeciente Meitnerio, el centésimo noveno de su nombre, trono número 109, corona metálica de justicia sintética para Lise Meitner, madre de la fisión.</p>
+
+      <p>Sin dar tregua al colisionador, Paulette aumentó la energía del haz y en los detectores relampaguearon tres colosos más: el Darmstadtio, el centésimo décimo de su nombre, trono número 110, coloso metálico efímero de los aceleradores alemanes; el Roentgenio, el centésimo undécimo de su nombre, trono número 111, heredero metálico sintético de los rayos invisibles; y el Copernicio, el centésimo duodécimo de su nombre, trono número 112, metal volátil artificial que honra el giro de los mundos.</p>
+
+      <p>El temblor del cosmos empezó a ceder cuando de la niebla cuántica emergieron los últimos seis soberanos para encajar las piedras angulares de la arquitectura universal: desde el oriente brilló el Nihonio, el centésimo decimotercero de su nombre, trono número 113, hijo metálico sintético del Sol Naciente; junto a él ancló su nave el Flerovio, el centésimo decimocuarto de su nombre, trono número 114, navegante metálico artificial hacia la isla de la estabilidad; alzaron luego sus escudos gemelos el Moscovio, el centésimo decimoquinto de su nombre, trono número 115, titán sintético de las llanuras de Moscú, y el Livermorio, el centésimo decimosexto de su nombre, trono número 116, metal sintético forjado en la alianza de dos continentes; rasgó la oscuridad la espada del Teneso, el centésimo decimoséptimo de su nombre, trono número 117, último halógeno sólido artificial de los valles de Oak Ridge; y finalmente, en un estallido de luz cegadora sobre el trono supremo del oriente cósmico, se coronó el Oganesón, el centésimo decimoctavo de su nombre, trono número 118, último rey sintético de la columna de los gases nobles y frontera final de la tabla conocida, engendrado en el acelerador para cerrar con llave de fuego la bóveda del universo.</p>
+
+      <p>Cuando el centésimo decimoctavo sello quedó grabado en la eternidad, una onda de armonía recorrió desde el abismo sintético hasta las nubes de hidrógeno primordial: los enlaces peptídicos volvieron a tensarse, la clorofila bebió la luz de la mañana y las hebras del ADN se entrelazaron de nuevo en su danza inmortal ante la mirada victoriosa de Paulette, señora de la Biotecnología.</p>
+    </section>
+
+    <footer class="colophon">
+      ✦ FIN DE LA ODISEA DE LA MATERIA ✦<br>
+      Ciento dieciocho tronos restaurados en el orden eterno del Cosmos
+    </footer>
+
+  </main>
+
+</body>
+</html>
